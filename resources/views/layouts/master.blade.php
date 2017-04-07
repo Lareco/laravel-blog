@@ -28,14 +28,10 @@
     </div>
 
     <div class="container">
-
       <div class="row">
         @yield('content')
-
         @include('layouts/sidebar')
-
       </div><!-- /.row -->
-
     </div><!-- /.container -->
 
     @include('layouts/footer')
