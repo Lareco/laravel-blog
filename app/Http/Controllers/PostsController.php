@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth')->except(['index', 'show']);
+  }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +42,16 @@ class PostsController extends Controller
     public function store(Request $request)
     {
       $this->validate(request(), ['body' => 'required', 'title' => 'required']);
-      Post::create(request(['title', 'body']));
+
+      auth()->user()->publish(
+        new Post(request(['title', 'body']))
+      );
+
+      // Post::create([
+      //   'title' => request('title'),
+      //   'body' => request('body'),
+      //   'user_id' => auth()->id()
+      // ]);
 
       return redirect('/');
     }
