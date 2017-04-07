@@ -34,6 +34,7 @@
             <button type="submit" class="btn btn-primary">Publish</button>
           </div>
         </form>
+        @include('layouts/errors')
       </div>
     </div>
   </div>
