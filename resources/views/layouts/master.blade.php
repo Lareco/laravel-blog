@@ -20,6 +20,13 @@
 
     @include('layouts/navbar')
 
+    @if ($flash = session('message'))
+      <div id="flash-message" class="alert alert-success" role="alert">
+        {{ $flash }}
+      </div>
+    @endif
+
+
     <div class="blog-header">
       <div class="container">
         <h1 class="blog-title">The Bootstrap Blog</h1>
@@ -35,6 +42,13 @@
     </div><!-- /.container -->
 
     @include('layouts/footer')
-
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      jQuery(function($) {
+        $('#flash-message').delay(500).fadeIn(250).delay(5000).fadeOut(500);
+      });
+    </script>
   </body>
 </html>

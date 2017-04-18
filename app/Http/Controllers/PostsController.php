@@ -20,6 +20,7 @@ class PostsController extends Controller
      */
     public function index(Posts $posts)
     {
+        // return session('message');
         // dd($posts);
         $posts = $posts->all();
         // $posts = Post::latest()
@@ -52,6 +53,8 @@ class PostsController extends Controller
       auth()->user()->publish(
         new Post(request(['title', 'body']))
       );
+
+      session()->flash('message',  'Your post has now been published!');
 
       // Post::create([
       //   'title' => request('title'),

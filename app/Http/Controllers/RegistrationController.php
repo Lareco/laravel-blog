@@ -22,8 +22,6 @@ class RegistrationController extends Controller
 
 		public function store(RegistrationRequest $request)
 		{
-			// Validate the fann
-
 			// Create and save the User
 			$user = User::create([
         'name' => request('name'),
@@ -31,10 +29,12 @@ class RegistrationController extends Controller
         'password' => bcrypt(request('password'))
       ]);
 
+      session()->flash('message', 'Thanks so much for signing up!');
+
 			// Sing them in
 			auth()->login($user);
 
-      \Mail::to($user)->send(new Welcome($user));
+      // \Mail::to($user)->send(new Welcome($user));
 
 			// Redirect to the home page
 			return redirect()->home();
