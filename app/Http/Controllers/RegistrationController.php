@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
 use Illuminate\Http\Request;
 use App\User;
 use App\Mail\Welcome;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+      // Redirect to '/' if loged in
+      $this->middleware('guest');
+    }
+
     public function create()
     {
     	return view('registration.create');
     }
 
-		public function store()
+		public function store(RegistrationRequest $request)
 		{
 			// Validate the fann
-			$this->validate(request(), [
-				'name' => 'required',
-				'email' => 'required|email',
-				'password' => 'required|confirmed'
-			]);
+
 			// Create and save the User
 			$user = User::create([
         'name' => request('name'),
